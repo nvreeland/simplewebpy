@@ -18,6 +18,9 @@ class RequestContext(object):
                                          environ = environ,
                                          keep_blank_values = 1)
     def start_response(self):
+        # python2.7+
+        #headers = [ (name, val) for val in vals
+        #                for name, vals in self.headers.iteritems() ]
         headers = []
         for name, vals in self.headers.iteritems():
             for val in vals:
