@@ -1,9 +1,9 @@
 #!/usr/bin/env python
-import simpleweb
+import simpleweb as web
 
-class hello(simpleweb.template):
+class hello(web.template):
     def __init__(self, name):
-        app.ctx.headers['Content-Type'] = ['text/plain']
+        web.ctx.headers['Content-Type'] = 'text/html'
         self.setValue('Title', 'Hello World from simplewebpy')
         if name:
             self.setValue('Name', name)
@@ -13,8 +13,7 @@ class hello(simpleweb.template):
 urls =  [ ('GET POST',  '/(.*)',    hello)
         ]
 
-app = simpleweb.application(urls)
+app = web.application(urls)
 
 if __name__ == '__main__':
     app.run()
-
