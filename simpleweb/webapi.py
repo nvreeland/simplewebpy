@@ -11,18 +11,16 @@ class RequestContext(object):
 
     def __init__(self):
         self.status = '200 OK'
-        self.headers = { 'Content-Type': ['text/plain'] }
-        self._start_response = None
-        self.environ = None
+        self.headers = { 'Content-Type': 'text/plain' }
 
-    def init(self, environ, start_response):
-        self.environ = environ
+    def init(self, env, start_response):
+        self.env = env
         self._start_response = start_response
 
-        self.request_method = environ.get('REQUEST_METHOD')
-        self.path_info = urllib.unquote(environ.get('PATH_INFO'))
-        self.cgi_vars = cgi.FieldStorage(fp = environ['wsgi.input'],
-                                         environ = environ,
+        self.method = env.get('REQUEST_METHOD')
+        self.path_info = urllib.unquote(env.get('PATH_INFO'))
+        self.cgi_vars = cgi.FieldStorage(fp = env['wsgi.input'],
+                                         environ = env,
                                          keep_blank_values = 1)
     def start_response(self):
         # python2.7+
@@ -38,3 +36,20 @@ class RequestContext(object):
         self._start_response(self.status, headers)
 
 ctx = context = RequestContext()
+ctx.__doc__ = """
+A `storage` object containing various information about the request:
+
+`env`
+    : A dictionary containg the standard WSGI environment variables.
+
+`method`
+    : The HTTP request method.
+
+### Response Data
+
+`status` (default: "200 OK")
+    : The status code used in the response.
+
+`headers`
+    : A dictionary storing response headers.  Key is the header name, Value is the header value.  If Value is a list, the header is sent, one for each element.
+"""
