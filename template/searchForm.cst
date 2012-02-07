@@ -1,0 +1,5 @@
+
+<form action="/search" method="GET">
+    <input name="q" type="text" value="<?cs var:Query ?>">
+    <input type="submit">
+</form>

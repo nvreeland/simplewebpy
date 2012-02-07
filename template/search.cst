@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Example search page</title>
+    <body>
+        <div><?cs var:SearchForm ?></div>
+        <?cs alt:SearchResults ?><?cs /alt ?>
+    </body>
+</html>
