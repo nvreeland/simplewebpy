@@ -27,7 +27,7 @@ class RequestContext(object):
                 headers.append( (name, val) )
         self._start_response(self.status, headers)
 
-class WebApplication(object):
+class application(object):
 
     def __init__(self, mapping = []):
         self.urlMapping = mapping
@@ -37,15 +37,15 @@ class WebApplication(object):
         return WSGIServer(self.handleRequest).run()
 
     def handleRequest(self, environ, start_response):
-        ctx = RequestContext(environ, start_response)
+        self.ctx = RequestContext(environ, start_response)
         for (supportedMethods, regexp, handler) in self.urlMapping:
-            if ctx.request_method not in supportedMethods.split(' '):
+            if self.ctx.request_method not in supportedMethods.split(' '):
                 continue
-            m = re.match(regexp, ctx.path_info)
+            m = re.match(regexp, self.ctx.path_info)
             if m is None:
                 continue
-            data = handler(self, *m.groups())
-            ctx.start_response()
-            return data
-        ctx.start_response()
+            h = handler(*m.groups())
+            self.ctx.start_response()
+            return [h.render(),]
+        self.ctx.start_response()
         return ['What happened?',]

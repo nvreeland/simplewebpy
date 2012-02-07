@@ -1,16 +1,19 @@
 #!/usr/bin/env python
-from simpleweb import WebApplication
+import simpleweb
 
-def hello(ctx, name):
-    if name:
-        yield 'Hello %s!\n' % name
-    else:
-        yield 'Hello World!\n'
+class hello(simpleweb.template):
+    def __init__(self, name):
+        app.ctx.headers['Content-Type'] = ['text/plain']
+        self.setValue('Title', 'Hello World from simplewebpy')
+        if name:
+            self.setValue('Name', name)
+        else:
+            self.setValue('Name', 'World')
 
 urls =  [ ('GET POST',  '/(.*)',    hello)
         ]
 
-app = WebApplication(urls)
+app = simpleweb.application(urls)
 
 if __name__ == '__main__':
     app.run()

@@ -8,3 +8,4 @@ __author__ = [
 __license__ = 'public domain'
 
 from application import *
+from template import *
