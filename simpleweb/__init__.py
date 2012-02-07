@@ -7,5 +7,6 @@ __author__ = [
     ]
 __license__ = 'public domain'
 
-from application import *
-from template import *
+from application import application
+from template import template
+from webapi import ctx
