@@ -13,6 +13,9 @@ class template(object):
     def render(self, fileName = None):
         if fileName is None:
             fileName = type(self).__name__
-        cs = CS(self._hdf)
+        try:
+            cs = CS(self._hdf)
+        except AttributeError:
+            cs = CS(HDF())
         cs.parseFile('/var/www/simplewebpy/template/%s.cst' % fileName)
         return cs.render()
