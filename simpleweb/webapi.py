@@ -11,7 +11,7 @@ class RequestContext(object):
 
     def __init__(self):
         self.status = '200 OK'
-        self.headers = { 'Content-Type': 'text/plain' }
+        self.headers = { 'Content-Type': 'text/html' }
 
     def init(self, env, start_response):
         self.env = env
@@ -19,9 +19,9 @@ class RequestContext(object):
 
         self.method = env.get('REQUEST_METHOD')
         self.path_info = urllib.unquote(env.get('PATH_INFO'))
-        self.cgi_vars = cgi.FieldStorage(fp = env['wsgi.input'],
-                                         environ = env,
-                                         keep_blank_values = 1)
+        self.cgi = cgi.FieldStorage(fp = env['wsgi.input'],
+                                    environ = env,
+                                    keep_blank_values = 1)
     def start_response(self):
         # python2.7+
         #headers = [ (name, val) for val in vals
@@ -44,6 +44,9 @@ A `storage` object containing various information about the request:
 
 `method`
     : The HTTP request method.
+
+`cgi`
+    : cgi.FieldStorage object.
 
 ### Response Data
 
