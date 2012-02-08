@@ -29,7 +29,7 @@ class application(object):
             except:
                 import traceback
                 web.ctx.headers = {'Content-Type': 'text/plain'}
-                resposne = traceback.format_exc()
+                response = traceback.format_exc()
             web.ctx.start_response()
             return [response,]
         # No request handler!

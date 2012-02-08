@@ -20,7 +20,7 @@ class widget(object):
     def render_cs(self, fileType, fileName = None):
         if fileName is None:
             fileName = type(self).__name__
-        path = '{0}/templates/{0}.{1}'.format(
+        path = '{0}/templates/{1}.{2}'.format(
                 web.ctx.path, fileName, fileType)
         if not isfile(path):
             return None
