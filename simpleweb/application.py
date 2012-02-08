@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-import webapi as web
 import re
+import webapi as web
 
 __all__ = [
     'application',

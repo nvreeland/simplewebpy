@@ -20,6 +20,7 @@ class RequestContext(object):
 
         self.method = env.get('REQUEST_METHOD')
         self.path_info = urllib.unquote(env.get('PATH_INFO'))
+        self.path = env.get('DOCUMENT_ROOT')
         self.cgi = cgi.FieldStorage(fp = env['wsgi.input'],
                                     environ = env,
                                     keep_blank_values = 1)

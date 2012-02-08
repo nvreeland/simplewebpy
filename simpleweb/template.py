@@ -3,6 +3,7 @@ from os.path import isfile
 import neo_cgi
 from neo_util import HDF
 from neo_cs import CS
+import webapi as web
 
 __all__ = [
     'widget',
@@ -19,8 +20,8 @@ class widget(object):
     def render_cs(self, fileType, fileName = None):
         if fileName is None:
             fileName = type(self).__name__
-        path = '/var/www/simplewebpy/template/{0}.{1}'.format(
-                fileName, fileType)
+        path = '{0}/templates/{0}.{1}'.format(
+                web.ctx.path, fileName, fileType)
         if not isfile(path):
             return None
         try:
