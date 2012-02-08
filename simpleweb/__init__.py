@@ -8,5 +8,5 @@ __author__ = [
 __license__ = 'public domain'
 
 from application import application
-from template import template
+from template import widget, document
 from webapi import ctx

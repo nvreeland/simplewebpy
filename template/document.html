@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><?cs var:Document.Title ?></title>
+<?cs each:script = Document.Scripts ?>
+<?cs    if:script.src ?>
+        <script type="text/javascript" src="<?cs var:script.src ?>"></script>
+<?cs    else ?>
+        <script type="text/javascript">
+        <!--
+        <?cs var:script ?>
+        -->
+        </script>
+<?cs    /if ?>
+<?cs /each ?>
+<?cs each:stylesheet = Document.Css ?>
+<?cs   if:stylesheet.src ?>
+        <link rel="stylesheet" href="<?cs var:stylesheet.src ?>">
+<?cs   else ?>
+        <style type="text/css">
+        <!--
+        <?cs var:stylesheet ?>
+        -->
+        </style>
+<?cs   /if ?>
+<?cs /each ?>
+<?cs each:meta = Document.Meta ?>
+        <meta<?cs
+    if:meta.name
+        ?> name="<?cs var:meta.name ?>"<?cs
+    elif:meta.http-equiv
+        ?> http-equiv="<?cs var:meta.http-equiv ?>"<?cs
+    /if ?><?cs
+    if:meta.content
+        ?> content="<?cs var:meta.content ?>"<?cs
+    /if ?>
+<?cs /each ?>
+    </head>
+    <body>
+<?cs each:html = Document.Content ?>
+<?cs var:html ?>
+<?cs /each ?>
+    </body>
+</html>

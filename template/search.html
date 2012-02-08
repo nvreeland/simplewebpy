@@ -1,0 +1,11 @@
+<form action="/search" method="GET">
+    <div id="searchFormTitle">Search:</div>
+    <div id="searchFormQuery">
+        <input name="q" type="text" value="<?cs var:Search.Query ?>">
+    </div>
+    <div id="searchFormSubmit">
+        <input type="submit">
+    </div>
+</form>
+
+<?cs var:Search.Results ?>

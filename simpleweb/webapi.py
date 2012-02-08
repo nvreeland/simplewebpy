@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import cgi
 import urllib
+from template import document
 
 __all__ = [
     'RequestContext',
@@ -22,6 +23,8 @@ class RequestContext(object):
         self.cgi = cgi.FieldStorage(fp = env['wsgi.input'],
                                     environ = env,
                                     keep_blank_values = 1)
+        self.doc = document(title = 'simpleweb.py')
+
     def start_response(self):
         # python2.7+
         #headers = [ (name, val) for val in vals
@@ -55,4 +58,7 @@ A `storage` object containing various information about the request:
 
 `headers`
     : A dictionary storing response headers.  Key is the header name, Value is the header value.  If Value is a list, the header is sent, one for each element.
+
+`widgets`
+    : A list of widgets to be displayed.
 """
