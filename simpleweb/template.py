@@ -12,6 +12,8 @@ __all__ = [
 
 class widget(object):
     def setValue(self, name, value):
+        if not isinstance(value, str):
+            value = str(value)
         try:
             self._hdf.setValue(name, value)
         except AttributeError:
