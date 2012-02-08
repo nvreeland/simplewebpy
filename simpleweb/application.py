@@ -24,16 +24,14 @@ class application(object):
             if m is None:
                 continue
             try:
-                w = widget(*m.groups())
+                web.ctx.doc.widgets.append(widget(*m.groups()))
+                response = web.ctx.doc.render()
             except:
                 import traceback
                 web.ctx.headers = {'Content-Type': 'text/plain'}
-                web.ctx.start_response()
-                return [traceback.format_exc(),]
-            else:
-                web.ctx.doc.widgets.append(w)
-                web.ctx.start_response()
-                return [web.ctx.doc.render(),]
+                resposne = traceback.format_exc()
+            web.ctx.start_response()
+            return [response,]
         # No request handler!
         # 404 Not found
         web.ctx.status = '404 Not Found'
