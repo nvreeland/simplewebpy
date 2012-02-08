@@ -24,13 +24,11 @@ class widget(object):
                 web.ctx.path, fileName, fileType)
         if not isfile(path):
             return None
-        try:
-            cs = CS(self._hdf)
-        except AttributeError:
-            cs = CS(HDF())
+        cs = CS(self._hdf)
         cs.parseFile(path)
         return cs.render()
     def render(self, fileName = None):
+        self.setValue('Script.Name', web.ctx.script_name)
         js = self.render_cs('js', fileName)
         css = self.render_cs('css', fileName)
         html = self.render_cs('html', fileName)
@@ -45,6 +43,7 @@ class document(widget):
             title = '{0} -- {1}'.format(title, self.title)
         self.setValue('Document.Title', title)
     def render(self):
+        self.setValue('Script.Name', web.ctx.script_name)
         for i, w in enumerate(self.widgets):
             (js, css, html) = w.render()
             if js:
