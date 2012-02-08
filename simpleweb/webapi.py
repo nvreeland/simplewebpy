@@ -25,6 +25,7 @@ class RequestContext(object):
                                     environ = env,
                                     keep_blank_values = 1)
         self.doc = document(title = 'simpleweb.py')
+        self.addWidget = self.doc.widgets.append
 
     def start_response(self):
         # python2.7+
