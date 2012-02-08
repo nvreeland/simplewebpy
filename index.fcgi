@@ -3,6 +3,7 @@ import simpleweb as web
 
 class search(web.widget):
     def __init__(self):
+        web.ctx.doc.setTitle('Fake Search')
         query = web.ctx.cgi.getfirst('q')
         if query:
             self.setValue('Search.Query', query)
@@ -11,7 +12,7 @@ class search(web.widget):
 
 class hello(web.widget):
     def __init__(self, name):
-        web.ctx.doc.docTitle('Hello world')
+        web.ctx.doc.setTitle('Hello world')
         if name:
             self.setValue('Hello.Name', name)
 

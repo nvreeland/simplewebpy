@@ -22,7 +22,7 @@ class widget(object):
         path = '/var/www/simplewebpy/template/{0}.{1}'.format(
                 fileName, fileType)
         if not isfile(path):
-            return ''
+            return None
         try:
             cs = CS(self._hdf)
         except AttributeError:
@@ -39,14 +39,17 @@ class document(widget):
     def __init__(self, title = None):
         self.title = title
         self.widgets = []
-    def docTitle(self, title):
+    def setTitle(self, title):
         if self.title:
             title = '{0} -- {1}'.format(title, self.title)
         self.setValue('Document.Title', title)
     def render(self):
         for i, w in enumerate(self.widgets):
             (js, css, html) = w.render()
-            self.setValue('Document.Scripts.{0}'.format(i), js)
-            self.setValue('Document.Css.{0}'.format(i), css)
-            self.setValue('Document.Content.{0}'.format(i), html)
+            if js:
+                self.setValue('Document.Scripts.{0}'.format(i), js)
+            if css:
+                self.setValue('Document.Css.{0}'.format(i), css)
+            if html:
+                self.setValue('Document.Content.{0}'.format(i), html)
         return self.render_cs('html')
