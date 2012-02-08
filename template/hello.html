@@ -1,1 +1,7 @@
-<p>Hello <?cs alt:Hello.Name ?>World<?cs /alt ?>!</p>
+<p>Hello <?cs
+        if:Hello.Name
+?><?cs      var:html_escape(Hello.Name)
+?><?cs  else
+            ?>World<?cs
+        /if
+?>!</p>
