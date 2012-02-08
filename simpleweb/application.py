@@ -24,7 +24,7 @@ class application(object):
             if m is None:
                 continue
             try:
-                web.ctx.doc.widgets.append(widget(*m.groups()))
+                web.ctx.doc.widgets.insert(0, widget(*m.groups()))
                 response = web.ctx.doc.render()
             except:
                 import traceback
