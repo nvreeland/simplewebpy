@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """simpleweb.py: simple web framework"""
 
-__version__ = '0.01'
+__version__ = '0.02'
 __author__ = [
     'Jake Kupersmith <jakerosoft@gmail.com>',
     ]
