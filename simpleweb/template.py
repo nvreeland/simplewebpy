@@ -30,7 +30,7 @@ class widget(object):
         cs.parseFile(path)
         return cs.render()
     def render(self, fileName = None):
-        self.setValue('Script.Name', web.ctx.script_name)
+        self.setValue('Script.Name', web.ctx.script_name.rstrip('/'))
         js = self.render_cs('js', fileName)
         css = self.render_cs('css', fileName)
         html = self.render_cs('html', fileName)
