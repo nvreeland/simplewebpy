@@ -12,7 +12,9 @@ __all__ = [
 
 class widget(object):
     def setValue(self, name, value):
-        if not isinstance(value, str):
+        if value is None:
+            value = ''
+        elif not isinstance(value, str):
             value = str(value)
         try:
             self._hdf.setValue(name, value)
@@ -30,7 +32,7 @@ class widget(object):
         cs.parseFile(path)
         return cs.render()
     def render(self, fileName = None):
-        self.setValue('Script.Name', web.ctx.script_name.rstrip('/'))
+        self.setValue('Script.Name', web.ctx.script_name)
         js = self.render_cs('js', fileName)
         css = self.render_cs('css', fileName)
         html = self.render_cs('html', fileName)
@@ -40,6 +42,16 @@ class document(widget):
     def __init__(self, title = None):
         self.title = title
         self.widgets = []
+        self.metaCount = 0
+    def setMeta(self, equiv = None, name = None, content = None):
+        i = self.metaCount
+        if equiv:
+            self.setValue('Document.Meta.{0}.equiv'.format(i), equiv)
+        if name:
+            self.setValue('Document.Meta.{0}.name'.format(i), name)
+        if content:
+            self.setValue('Document.Meta.{0}.content'.format(i), content)
+        self.metaCount += 1
     def setTitle(self, title):
         if self.title:
             title = '{0} -- {1}'.format(title, self.title)

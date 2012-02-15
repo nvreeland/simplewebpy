@@ -19,7 +19,7 @@ class RequestContext(object):
         self._start_response = start_response
 
         self.method = env.get('REQUEST_METHOD')
-        self.script_name = env.get('SCRIPT_NAME')
+        self.script_name = env.get('SCRIPT_NAME').rstrip('/')
         self.path_info = urllib.unquote(env.get('PATH_INFO'))
         self.path = env.get('DOCUMENT_ROOT')
         self.cgi = cgi.FieldStorage(fp = env['wsgi.input'],
