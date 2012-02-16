@@ -1,1 +1,8 @@
 A simple? web framework
+Dependecies:
+python 2.6+
+clearsilver python module
+Bug Report:
+https://github.com/jakup/simplewebpy/issues
+Wiki:
+https://github.com/jakup/simplewebpy/wiki
