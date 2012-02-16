@@ -38,6 +38,12 @@ class widget(object):
         html = self.render_cs('html', fileName)
         return (js, css, html)
 
+"""
+this class is called by document.render and builds the widget
+object the render method returns the proper js, css, and html
+for this widget to the document class"""
+        
+
 class document(widget):
     def __init__(self, title = None):
         self.title = title
@@ -67,3 +73,6 @@ class document(widget):
             if html:
                 self.setValue('Document.Content.{0}'.format(i), html)
         return self.render_cs('html')
+""" 
+When the init method is called by web.RequestContext, the application builds
+the object and returns the proper js, css, and html with the render method"""
